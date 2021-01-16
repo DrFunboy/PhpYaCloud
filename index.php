@@ -27,6 +27,9 @@ If (($key == "")||($secretkey == ""))
 		<div class="key_input_text"> Введите секретный ключ
 			<input type="text" name="secretkey" autocomplete="off">
 		</div>
+		<div class="key_input_text"> Введите название bucket
+			<input type="text" name="bucketname" autocomplete="off">
+		</div>
 		<button type="submit" name="do_log_enter">Подтвердить</button>
 	</form>
 	<?

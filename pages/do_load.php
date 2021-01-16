@@ -27,10 +27,15 @@ if (isset($data["do_but_enter"]))
 	{
 		echo '<div style="color: red;  font-size: 1.5vw;">' . array_shift($errors).'</div>' ;
 	}
+	$data_sets = file_get_contents("../settings.json");
+	$data_sets = json_decode($data_sets, true);
+	$key = ($data_sets['key']);
+	$secretkey = ($data_sets['secretkey']);
+	$bucketname = ($data_sets['bucketname']);
 	$sharedConfig = [
 		'credentials' => [
-		  'key'      => 'BeqMVuax0Tq7HRrNvuDU',
-	  	  'secret'   => 'rIMYMN6oXgCEVD7N5g8z2ZBZ1vKMLJfioKDDye4o',
+		  'key'      => $key,
+	  	  'secret'   => $secretkey,
 		],
 		'region'   => 'us-east-1',
 		'endpoint' => 'https://storage.yandexcloud.net',
@@ -39,14 +44,13 @@ if (isset($data["do_but_enter"]))
 
 	$sdk = new Aws\Sdk($sharedConfig);
 	$s3Client = $sdk->createS3();
-	$bucket = "foldertest";
 	$s3Client->putObject([
-        'Bucket' => $bucket,
+        'Bucket' => $bucketname,
 				'Key'    => $folder.$file_name,
         'Body'   => fopen( $new_temp. $file_name, 'r')
 ]);
 
-	echo "https://storage.yandexcloud.net/".$bucket."/".$folder.$file_name;
+	echo "https://storage.yandexcloud.net/".$bucketname."/".$folder.$file_name;
 	gc_collect_cycles();
 	unlink($new_temp.$file_name);
 }
