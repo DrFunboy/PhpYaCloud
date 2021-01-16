@@ -7,6 +7,10 @@ if (isset($data["do_but_enter"]))
 {
 	$file_name = $_FILES ['file_inp']['name'];
 	$file_tmp_name = $_FILES ['file_inp']['tmp_name'];
+	$folder = ($_POST['file_folder']);
+	if (($folder)!="") {
+	$folder = ($folder."/");
+	}
 	$new_temp = "../files/";
 	$errors = array();
 	if (($file_name) == "")
@@ -38,10 +42,12 @@ if (isset($data["do_but_enter"]))
 	$bucket = "foldertest";
 	$s3Client->putObject([
         'Bucket' => $bucket,
-				'Key'    => $file_name,
+				'Key'    => $folder.$file_name,
         'Body'   => fopen( $new_temp. $file_name, 'r')
 ]);
-	unlink($new_temp. $file_name);
-	echo "https://storage.yandexcloud.net/".$bucket."/".$file_name;
+
+	echo "https://storage.yandexcloud.net/".$bucket."/".$folder.$file_name;
+	gc_collect_cycles();
+	unlink($new_temp.$file_name);
 }
 ?>
