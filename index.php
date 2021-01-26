@@ -59,6 +59,7 @@ else{
 				<button type="submit" name="do_but_enter">Загрузить</button>
 			</form>
 		</div>
+		<a href="delete.php">Удаление </a>
 <?
 }
 ?>

@@ -6,17 +6,12 @@ ini_set('log_errors','on');
 ini_set('error_log', __DIR__ . '/../logs/main_error.log');*/
 header('Content-Type: text/html; charset=utf-8');
 $data = $_POST;
-if (isset($data["do_but_enter"]))
+if (isset($data["do_but_del"]))
 {
-	$file_name = $_FILES ['file_inp']['name'];
-	$file_tmp_name = $_FILES ['file_inp']['tmp_name'];
-	$folder = ($_POST['file_folder']);
-	if (($folder)!="") {
-	$folder = ($folder."/");
-	}
-	$new_temp = "../files/";
+
+	$folder = ($_POST['file_delete']);
 	$errors = array();
-	if (($file_name) == "")
+	if (($folder) == "")
 	{
 		$errors[] = 'Файл не выбран';
 	}
@@ -24,7 +19,6 @@ if (isset($data["do_but_enter"]))
 	{
 
 			echo(" <div style='color: #0f0;'>да! </div>");
-			move_uploaded_file($file_tmp_name, $new_temp. $file_name);
 	}
 	else
 	{
@@ -38,7 +32,6 @@ if (isset($data["do_but_enter"]))
 	$bucketname = ($data_sets['bucketname']);
 
 
-try{
 	$sharedConfig = [
 		'credentials' => [
 		  'key'      => $key,
@@ -50,18 +43,14 @@ try{
 	];
 	$sdk = new Aws\Sdk($sharedConfig);
 	$s3Client = $sdk->createS3();
-$s3Client->putObject(
+	echo "<pre>";
+	var_dump(
+		$s3Client->deleteObject(
 		[
         'Bucket' => $bucketname,
-				'Key'    => $folder.$file_name,
-        'Body'   => fopen( $new_temp. $file_name, 'r')
-		]);
-	echo "https://storage.yandexcloud.net/".$bucketname."/".$folder.$file_name;
-	gc_collect_cycles();
-	unlink($new_temp.$file_name);
-	} catch (S3Exception $e) {
-    echo $e->getMessage();
-	}
-
+				'Key'    => $folder
+		])
+	);
+	echo "</pre>";
 }
 ?>

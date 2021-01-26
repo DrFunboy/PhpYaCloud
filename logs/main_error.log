@@ -1,0 +1,12 @@
+
+[20-Jan-2021 16:50:28 Europe/Moscow] PHP Notice:  Undefined variable: fle_name in W:\domains\PhpYaCloud\pages\do_load.php on line 56
+[20-Jan-2021 16:50:28 Europe/Moscow] PHP Fatal error:  Uncaught InvalidArgumentException: Found 1 error while validating the input provided for the PutObject operation:
+[Key] expected string length to be >= 1, but found string length of 0 in W:\vendor\aws\aws-sdk-php\src\Api\Validator.php:65
+Stack trace:
+#0 W:\vendor\aws\aws-sdk-php\src\Middleware.php(78): Aws\Api\Validator->validate('PutObject', Object(Aws\Api\StructureShape), Array)
+#1 W:\vendor\aws\aws-sdk-php\src\S3\S3Client.php(564): Aws\Middleware::Aws\{closure}(Object(Aws\Command), NULL)
+#2 W:\vendor\aws\aws-sdk-php\src\S3\S3Client.php(587): Aws\S3\S3Client::Aws\S3\{closure}(Object(Aws\Command), NULL)
+#3 W:\vendor\aws\aws-sdk-php\src\S3\S3Client.php(521): Aws\S3\S3Client::Aws\S3\{closure}(Object(Aws\Command), NULL)
+#4 W:\vendor\aws\aws-sdk-php\src\S3\S3Client.php(540): Aws\S3\S3Client::Aws\S3\{closure}(Object(Aws\Command), NULL)
+#5 W:\vendor\aws\aws-sdk-php\src\Middleware.php(54): Aws\S3\S3Client::Aws\S3\{closure}(Object(Aws\Command), NULL)
+#6 W:\vendor\aws\aws-sdk-php\src\S3\SSECMiddleware.php(59): Aws\Mi in W:\vendor\aws\aws-sdk-php\src\Api\Validator.php on line 65
